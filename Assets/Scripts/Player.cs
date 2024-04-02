@@ -5,6 +5,8 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController2D _characterController;
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Field _field;
+    [SerializeField] private Barrel _BurrelPrefab;
 
     private int _verticalHash = Animator.StringToHash("Vertical"); 
     private int _horizontalHash = Animator.StringToHash("Horizontal");
@@ -13,12 +15,6 @@ public class Player : MonoBehaviour
     private int _speedHash = Animator.StringToHash("Speed");
     private Vector2 _moveVector;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         var x = Input.GetAxisRaw("Horizontal");
@@ -39,5 +35,11 @@ public class Player : MonoBehaviour
         }
 
         _characterController.Move(_moveVector);
+
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            var cellTransform = _field.GetClosestCell(this.transform);
+            Instantiate(_BurrelPrefab, cellTransform.position, Quaternion.identity);
+        }
     }
 }
