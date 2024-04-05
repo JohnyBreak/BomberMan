@@ -39,7 +39,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) 
         {
             var cellTransform = _field.GetClosestCell(this.transform);
-            Instantiate(_BurrelPrefab, cellTransform.position, Quaternion.identity);
+            var barrel = Instantiate(_BurrelPrefab, cellTransform.position, Quaternion.identity);
+            barrel.Init(_field);
         }
     }
 }

@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
+    [SerializeField] private Cell _emptyCell;
+    [SerializeField] private Cell _rockCell;
+    [SerializeField] private Cell _bushCell;
+
     [SerializeField] private int _columnCount;
     [SerializeField] private int _rowCount;
     [SerializeField] private Transform[] _cells;
+
+    private void Start()
+    {
+        SpawnCells();
+    }
+
+    private void SpawnCells() 
+    {
+        
+    }
 
     public Transform GetClosestCell(Transform playerTransform) 
     {
