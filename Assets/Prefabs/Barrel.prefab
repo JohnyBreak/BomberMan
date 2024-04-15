@@ -103,7 +103,7 @@ MonoBehaviour:
   _radius: 2
   _obstacleMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 832
   _explodableMask:
     serializedVersion: 2
     m_Bits: 1152
