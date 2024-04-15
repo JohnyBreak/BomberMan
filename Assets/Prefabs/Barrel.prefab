@@ -100,10 +100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifeTime: 3
   _explode: {fileID: 8556854473827177229, guid: 0bb8dd29a8d096649ad2ab3d88f27e77, type: 3}
-  _radius: 3
-  _mask:
+  _radius: 2
+  _obstacleMask:
     serializedVersion: 2
     m_Bits: 320
+  _explodableMask:
+    serializedVersion: 2
+    m_Bits: 1152
 --- !u!61 &4085950928302459176
 BoxCollider2D:
   m_ObjectHideFlags: 0
