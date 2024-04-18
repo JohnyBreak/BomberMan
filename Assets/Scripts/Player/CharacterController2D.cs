@@ -22,14 +22,13 @@ public class CharacterController2D : MonoBehaviour
     private Collider2D[] _headResults = new Collider2D[1];
     private bool _isGrounded;
 
-    //[SerializeField] 
+    [SerializeField] 
     private float _distanceToFloor = 0.51f;
     private Transform _transform;
     private Collider2D[] _groundResults = new Collider2D[1];
     private Vector2 _surfacePosition;
 
     private Vector3 _velocity;
-    //[SerializeField] private Vector3 _move;
 
     private GameObject _currentGroundObject;
     public GameObject CurrentGroundObject => _currentGroundObject;
@@ -44,8 +43,6 @@ public class CharacterController2D : MonoBehaviour
 
     public void Move(Vector3 moveVector)
     {
-        //_move = moveVector;
-
         _velocity += moveVector;
         CheckCollision();
         CheckGround();
@@ -65,8 +62,9 @@ public class CharacterController2D : MonoBehaviour
     {
         Vector2 point = _transform.position + _collisionCheckOffset;
         Vector2 size = new Vector2(_collisionCheckSize.x, _collisionCheckSize.y);
+        var _collisionResults = Physics2D.OverlapCircleAll(point, size.x/2, _obstacleLayerMask);
+        //var _collisionResults = Physics2D.OverlapBoxAll(point, size, 0, _obstacleLayerMask);
 
-        var _collisionResults = Physics2D.OverlapBoxAll(point, size, 0, _obstacleLayerMask);
 
         foreach (Collider2D hit in _collisionResults)
         {
@@ -83,7 +81,7 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
-    private void CheckGround() 
+    private void CheckGround()
     {
         Vector2 point = _transform.position + _groundCheckOffset;
         Vector2 size = new Vector2(_groundCheckSize.x, _groundCheckSize.y);
@@ -105,7 +103,7 @@ public class CharacterController2D : MonoBehaviour
             _isGrounded = false;
         }
 
-        if (_isGrounded && _velocity.y < 0) 
+        if (_isGrounded && _velocity.y < 0)
         {
             _transform.position = new Vector3(_transform.position.x, _surfacePosition.y + _distanceToFloor, _transform.position.z);
             Physics2D.SyncTransforms();
@@ -128,13 +126,13 @@ public class CharacterController2D : MonoBehaviour
 
     }
 
-    public void IgnoreLayer(int layer, bool ignore = true) 
+    public void IgnoreLayer(int layer, bool ignore = true)
     {
         if (ignore)
         {
             _groundLayerMask -= layer;
         }
-        else 
+        else
         {
             _groundLayerMask += layer;
         }
@@ -142,12 +140,14 @@ public class CharacterController2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireCube(transform.position + _groundCheckOffset, _groundCheckSize);
+        //Gizmos.color = Color.black;
+        //Gizmos.DrawWireCube(transform.position + _groundCheckOffset, _groundCheckSize);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + _collisionCheckOffset, _collisionCheckSize);
+        Gizmos.DrawWireSphere(transform.position + _collisionCheckOffset, _collisionCheckSize.x/2);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position + _headCheckOffset, _headCheckSize);
+        Gizmos.DrawWireCube(transform.position + _collisionCheckOffset, _collisionCheckSize);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawWireCube(transform.position + _headCheckOffset, _headCheckSize);
         Debug.DrawRay(transform.position, Vector3.down * _distanceToFloor, Color.black);
     }
 }

@@ -13,10 +13,25 @@ public class Player : MonoBehaviour
     private int _lastVerticalHash = Animator.StringToHash("LastVertical");
     private int _lastHorizontalHash = Animator.StringToHash("LastHorizontal");
     private int _speedHash = Animator.StringToHash("Speed");
+    private int _deathHash = Animator.StringToHash("Death");
+
     private Vector2 _moveVector;
 
-    void Update()
+    private bool _alive = true;
+
+    public void Kill() 
     {
+        _alive = false;
+        _animator.SetTrigger(_deathHash);
+    }
+
+    private void Update()
+    {
+        if (_alive == false) 
+        {
+            return;
+        }
+
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
 

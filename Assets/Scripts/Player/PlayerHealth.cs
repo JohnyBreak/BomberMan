@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IExplodable
 {
+    [SerializeField] private Player _player;
+    [SerializeField] private PlayerDeadText _deadText;
+
     public void Explode()
     {
         TakeDamage();
@@ -9,6 +12,7 @@ public class PlayerHealth : MonoBehaviour, IExplodable
 
     private void TakeDamage() 
     {
-        Debug.Log("player exploded");
+        _player.Kill();
+        _deadText.Activate();
     }
 }
