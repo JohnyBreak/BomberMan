@@ -13072,7 +13072,7 @@ Transform:
   m_GameObject: {fileID: 985469478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.47300005, y: -0.53600025, z: -0.23223469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13142,6 +13142,9 @@ MonoBehaviour:
   _animator: {fileID: 1723552207}
   _field: {fileID: 1357368673}
   _BurrelPrefab: {fileID: 3884135471480518397, guid: 87dc13199f46f774fb5c9874dedc4c1f, type: 3}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 3520
 --- !u!114 &985469482
 MonoBehaviour:
   m_ObjectHideFlags: 0
