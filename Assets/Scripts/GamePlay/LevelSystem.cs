@@ -1,15 +1,23 @@
-using UnityEngine;
+using System.Collections.Generic;
+using Zenject;
 
-public class LevelSystem : MonoBehaviour
+public class LevelSystem
 {
-    [SerializeField] Portal _portal;
-    [SerializeField] private DestructionTarget[] _targets;
+    private Portal _portal;
+    private List<DestructionTarget> _targets = new();
 
     private int currentTargetsCount;
 
-    private void Awake()
+    [Inject]
+    private void Construct(Portal portal) 
     {
-        currentTargetsCount = _targets.Length;
+        _portal = portal;
+    }
+
+    public void RegisterDestructable(DestructionTarget target) 
+    {
+        _targets.Add(target);
+        currentTargetsCount = _targets.Count;
     }
 
     internal void ReduceTargets()

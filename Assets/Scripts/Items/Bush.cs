@@ -1,8 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class Bush : MonoBehaviour, IExplodable
 {
-    [SerializeField] private PlayerScore _score;
+    private PlayerScore _score;
+
+    [Inject]
+    private void Construct(PlayerScore score)
+    {
+        _score = score;
+    }
 
     public void Explode()
     {

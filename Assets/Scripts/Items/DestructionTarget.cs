@@ -1,9 +1,18 @@
 using UnityEngine;
+using Zenject;
 
 public class DestructionTarget : MonoBehaviour, IExplodable
 {
-    [SerializeField] private LevelSystem _levelSystem;
-    [SerializeField] private PlayerScore _score;
+    private LevelSystem _levelSystem;
+    private PlayerScore _score;
+
+    [Inject]
+    private void Construct(LevelSystem levelSystem, PlayerScore score) 
+    {
+        _levelSystem = levelSystem;
+        _score = score;
+        _levelSystem.RegisterDestructable(this);
+    }
 
     public void Explode()
     {

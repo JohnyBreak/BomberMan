@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-public class PlayerScore : MonoBehaviour
+public class PlayerScore
 {
     public Action<uint> ScoreUpdated;
 

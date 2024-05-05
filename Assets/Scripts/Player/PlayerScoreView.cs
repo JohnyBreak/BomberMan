@@ -1,11 +1,19 @@
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class PlayerScoreView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private PlayerScore _score;
+
+    private PlayerScore _score;
     private const string _prefix = "Score: ";
+
+    [Inject]
+    private void Construct(PlayerScore playerScore) 
+    {
+        _score = playerScore;
+    }
 
     private void Awake()
     {
