@@ -14,7 +14,6 @@ public class BombRadiusBooster : MonoBehaviour, ICollectable
     public void Collect()
     {
         _stats.IncreaseBombRadius(1);
-        Debug.LogError("Collect");
         Destroy(this.gameObject);
     }
 }
