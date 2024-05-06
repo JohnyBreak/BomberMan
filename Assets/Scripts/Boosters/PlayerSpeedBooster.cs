@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class PlayerSpeedBooster : MonoBehaviour, ICollectable
+public class PlayerSpeedBooster : MonoBehaviour, ICollectable, IExplodable
 {
     private PlayerStats _stats;
 
@@ -14,6 +14,10 @@ public class PlayerSpeedBooster : MonoBehaviour, ICollectable
     public void Collect()
     {
         _stats.IncreasePlayerSpeed(0.3f);
+        Destroy(this.gameObject);
+    }
+    public void Explode()
+    {
         Destroy(this.gameObject);
     }
 }

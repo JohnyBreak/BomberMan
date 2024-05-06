@@ -1,7 +1,3 @@
-
-
-using UnityEngine;
-
 public class PlayerStats
 {
     private int _bombRadius;
@@ -45,6 +41,5 @@ public class PlayerStats
         }
 
         _bombRadius += amount;
-        Debug.LogError(_bombRadius);
     }
 }

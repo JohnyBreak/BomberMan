@@ -69,7 +69,11 @@ public class Barrel : MonoBehaviour, IExplodable
 
             if (explodableResult != null) 
             {
-                CreateExplode(rayDir);
+                if (explodableResult.TryGetComponent<IExplodable>(out var explodable)) 
+                {
+                    explodable.Explode();
+                }
+                //CreateExplode(rayDir);
                 break;
             }
 
