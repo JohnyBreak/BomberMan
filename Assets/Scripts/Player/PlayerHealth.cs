@@ -1,9 +1,18 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerHealth : MonoBehaviour, IExplodable
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private PlayerDeadText _deadText;
+    private Player _player;
+
+    private PlayerDeadText _deadText;
+
+    [Inject]
+    private void Construct(Player player, PlayerDeadText playerDeadText) 
+    {
+        _player = player;
+        _deadText = playerDeadText;
+    }
 
     public void Explode()
     {

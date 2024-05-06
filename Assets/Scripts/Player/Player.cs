@@ -1,13 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterController2D _characterController;
-    [SerializeField] private float _moveSpeed = 3f;
+    
     [SerializeField] private Animator _animator;
-    [SerializeField] private Field _field;
-    [SerializeField] private Barrel _BurrelPrefab;
-    [SerializeField] private LayerMask _layerMask;
+    
+    //[SerializeField] private LayerMask _layerMask;
 
     private int _verticalHash = Animator.StringToHash("Vertical"); 
     private int _horizontalHash = Animator.StringToHash("Horizontal");
@@ -17,18 +17,27 @@ public class Player : MonoBehaviour
     private int _deathHash = Animator.StringToHash("Death");
 
     private Vector2 _moveVector;
+    //private float _moveSpeed = 2f;
+    private PlayerStats _stats;
 
     private bool _alive = true;
+    public bool Alive => _alive;
 
-    private Vector3 _movePosition;
-
-    private float _cashedX;
-    private float _cashedY;
-
-    private void Awake()
+    [Inject]
+    private void Construct(PlayerStats stats) 
     {
-        _movePosition = transform.position;
+        _stats = stats;
     }
+
+    //private Vector3 _movePosition;
+
+    //private float _cashedX;
+    //private float _cashedY;
+
+    //private void Awake()
+    //{
+    //    _movePosition = transform.position;
+    //}
 
     public void Kill() 
     {
@@ -91,7 +100,7 @@ public class Player : MonoBehaviour
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
 
-        _moveVector = new Vector2(x, y).normalized * _moveSpeed;
+        _moveVector = new Vector2(x, y).normalized * _stats.PlayerMoveSpeed; //_moveSpeed;
 
         _animator.SetFloat(_horizontalHash, x);
         _animator.SetFloat(_verticalHash, y);
@@ -107,11 +116,6 @@ public class Player : MonoBehaviour
 
         _characterController.Move(_moveVector);
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            var cellTransform = _field.GetClosestCell(this.transform);
-            var barrel = Instantiate(_BurrelPrefab, cellTransform.position, Quaternion.identity);
-            barrel.Init(_field);
-        }
+        
     }
 }

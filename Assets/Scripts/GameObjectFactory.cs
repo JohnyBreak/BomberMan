@@ -31,4 +31,18 @@ public class GameObjectFactory
             quaternion,
             parent).GetComponent<T>();
     }
+
+    public T InstantiatePrefab<T>(
+        T prefabComponent,
+        Vector3 position,
+        Quaternion quaternion
+        )
+        where T : Component
+    {
+        return _container.InstantiatePrefab(
+            prefabComponent,
+            position,
+            quaternion,
+            null).GetComponent<T>();
+    }
 }

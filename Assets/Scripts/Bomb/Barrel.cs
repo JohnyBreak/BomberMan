@@ -1,17 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class Barrel : MonoBehaviour, IExplodable
 {
     [SerializeField] private float _lifeTime = 3;
+    [SerializeField] private float _damageRadius = .8f;
     [SerializeField] private Explode _explode;
-    [SerializeField] private int _radius = 2;
-    [SerializeField]  private LayerMask _obstacleMask;
+    //[SerializeField] private int _radius = 2;
+    [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private LayerMask _explodableMask;
 
     private Coroutine _waitRoutine;
+    private GameObjectFactory _factory;
+    private PlayerStats _stats;
 
-    public void Init(Field field)
+    [Inject]
+    private void Construct(GameObjectFactory factory, PlayerStats stats)
+    {
+        _factory = factory;
+        _stats = stats;
+    }
+
+    private void OnEnable()
     {
         _waitRoutine = StartCoroutine(WaitRoutine());
     }
@@ -38,62 +49,36 @@ public class Barrel : MonoBehaviour, IExplodable
         spawnExplode(Vector3.right);
         spawnExplode(Vector3.down);
         spawnExplode(Vector3.left);
-
-        Instantiate(_explode, transform.position, Quaternion.identity);
-        //for (int i = 0; i < _radius; i++)
-        //{
-        //    var rayDir = transform.position + Vector3.up * (i + 1);
-        //    var result = Physics2D.Linecast(transform.position, rayDir, _obstacleMask);
-        //    if (result.collider == null) 
-        //    {
-        //        Instantiate(_explode, rayDir, Quaternion.identity);
-        //    }
-
-        //    rayDir = transform.position + Vector3.right * (i + 1);
-        //    result = Physics2D.Linecast(transform.position, rayDir, _obstacleMask);
-        //    if (result.collider == null)
-        //    {
-        //        Instantiate(_explode, rayDir, Quaternion.identity);
-        //    }
-
-        //    rayDir = transform.position + Vector3.down * (i + 1);
-
-        //    result = Physics2D.Linecast(transform.position, rayDir, _obstacleMask);
-        //    if (result.collider == null)
-        //    {
-        //        Instantiate(_explode, rayDir, Quaternion.identity);
-        //    }
-
-        //    rayDir = transform.position + Vector3.left * (i + 1);
-        //    result = Physics2D.Linecast(transform.position, rayDir, _obstacleMask);
-        //    if (result.collider == null)
-        //    {
-        //        Instantiate(_explode, rayDir, Quaternion.identity);
-        //    }
-        //}
+        
+        CreateExplode(transform.position);
     }
 
     private void spawnExplode(Vector3 direction) 
     {
-        for (int i = 0; i < _radius; i++)
+        for (int i = 0; i < _stats.BombRadius; i++)//_radius; i++)
         {
             var rayDir = transform.position + direction * (i + 1);
-            var obstacleResult = Physics2D.OverlapBox(rayDir, Vector2.one * 0.9f, 0, _obstacleMask);
-            //var result = Physics2D.Linecast(transform.position, rayDir, _obstacleMask);
+            var obstacleResult = Physics2D.OverlapBox(rayDir, Vector2.one * _damageRadius, 0, _obstacleMask);
+
             if (obstacleResult != null)
             {
                 break;
             }
 
-            var explodableResult = Physics2D.OverlapBox(rayDir, Vector2.one * 0.9f, 0, _explodableMask);
+            var explodableResult = Physics2D.OverlapBox(rayDir, Vector2.one * _damageRadius, 0, _explodableMask);
 
             if (explodableResult != null) 
             {
-                Instantiate(_explode, rayDir, Quaternion.identity);
+                CreateExplode(rayDir);
                 break;
             }
 
-            Instantiate(_explode, rayDir, Quaternion.identity);
+            CreateExplode(rayDir);
         }
     }
+
+    private Explode CreateExplode(Vector3 position) 
+    {
+        return _factory.InstantiatePrefab(_explode, position, Quaternion.identity);
+    } 
 }
