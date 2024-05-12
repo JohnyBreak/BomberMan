@@ -19,14 +19,15 @@ public class Player : MonoBehaviour
     private Vector2 _moveVector;
     //private float _moveSpeed = 2f;
     private PlayerStats _stats;
-
-    private bool _alive = true;
-    public bool Alive => _alive;
+    private GameStateController _gameStateController;
+    //private bool _alive = true;
+    //public bool Alive => _alive;
 
     [Inject]
-    private void Construct(PlayerStats stats) 
+    private void Construct(PlayerStats stats, GameStateController stateController) 
     {
         _stats = stats;
+        _gameStateController = stateController;
     }
 
     //private Vector3 _movePosition;
@@ -41,16 +42,22 @@ public class Player : MonoBehaviour
 
     public void Kill() 
     {
-        _alive = false;
+        _gameStateController.SetState(LoseState.Name);
+        //_alive = false;
         _animator.SetTrigger(_deathHash);
     }
 
     private void Update()
     {
-        if (_alive == false) 
+        if (_gameStateController.IsCurrentState(GamePlayState.Name) == false) 
         {
             return;
         }
+
+        //if (_alive == false) 
+        //{
+        //    return;
+        //}
 
 
         //transform.position = Vector3.MoveTowards(transform.position, _movePosition, _moveSpeed * Time.deltaTime);
@@ -95,12 +102,10 @@ public class Player : MonoBehaviour
         //    _animator.SetFloat(_speedHash, 1);
         //}
 
-
-
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
 
-        _moveVector = new Vector2(x, y).normalized * _stats.PlayerMoveSpeed; //_moveSpeed;
+        _moveVector = new Vector2(x, y).normalized * _stats.PlayerMoveSpeed;
 
         _animator.SetFloat(_horizontalHash, x);
         _animator.SetFloat(_verticalHash, y);
@@ -115,7 +120,5 @@ public class Player : MonoBehaviour
         }
 
         _characterController.Move(_moveVector);
-
-        
     }
 }

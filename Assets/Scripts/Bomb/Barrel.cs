@@ -4,6 +4,7 @@ using Zenject;
 
 public class Barrel : MonoBehaviour, IExplodable
 {
+    [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private float _lifeTime = 3;
     [SerializeField] private float _damageRadius = .8f;
     [SerializeField] private Explode _explode;
@@ -25,6 +26,14 @@ public class Barrel : MonoBehaviour, IExplodable
     private void OnEnable()
     {
         _waitRoutine = StartCoroutine(WaitRoutine());
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.TryGetComponent<Player>(out var player))
+        {
+            _boxCollider.isTrigger = false;
+        }
     }
 
     private IEnumerator WaitRoutine()

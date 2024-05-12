@@ -6,22 +6,33 @@ public class BarrelSpawner : MonoBehaviour
     [SerializeField] private Barrel _BurrelPrefab;
     private GameObjectFactory _factory;
     private Field _field;
-    private Player _player;
+    //private Player _player;
+    private GameStateController _stateController;
 
     [Inject]
-    private void Construct(Player player, GameObjectFactory factory, Field field)
+    private void Construct(
+        //Player player, 
+        GameObjectFactory factory,
+        Field field, 
+        GameStateController stateController)
     {
         _field = field;
         _factory = factory;
-        _player = player;
+        //_player = player;
+        _stateController = stateController;
     }
 
     void Update()
     {
-        if (_player.Alive == false)
+        if (_stateController.IsCurrentState(GamePlayState.Name) == false) 
         {
             return;
         }
+
+        //if (_player.Alive == false)
+        //{
+        //    return;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

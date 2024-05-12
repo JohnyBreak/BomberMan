@@ -5,7 +5,7 @@ public class RootInstaller : MonoInstaller
     private readonly System.Type[] _installersTypes = new System.Type[]
     {
         typeof(GameObjectFactoryInstaller),
-        //typeof(PlayerInstaller),
+        typeof(GameStateInstaller),
         typeof(LevelInstaller)
     };
 

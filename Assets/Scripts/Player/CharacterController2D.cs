@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
@@ -27,7 +28,7 @@ public class CharacterController2D : MonoBehaviour
     private Transform _transform;
     private Collider2D[] _groundResults = new Collider2D[1];
     private Vector2 _surfacePosition;
-
+    private Collider2D[] _playerChildColliders;
     private Vector3 _velocity;
 
     private GameObject _currentGroundObject;
@@ -38,6 +39,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Start()
     {
+        _playerChildColliders = GetComponentsInChildren<Collider2D>();
         _transform = transform;
     }
 
@@ -68,8 +70,21 @@ public class CharacterController2D : MonoBehaviour
 
         foreach (Collider2D hit in _collisionResults)
         {
-            if (hit == _playerCollider)
+            if (hit.isTrigger) 
+            {
                 continue;
+            }
+
+            if (_playerChildColliders.Contains(hit)) 
+            {
+                continue;
+            }
+
+            if (hit == _playerCollider)
+            {
+                continue;
+            }
+
             ColliderDistance2D colliderDistance = hit.Distance(_playerCollider);
 
             if (colliderDistance.isOverlapped)

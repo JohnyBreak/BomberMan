@@ -1,13 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private GameState _gameState;
     [SerializeField] private Collider2D _collider;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private void Awake()
+    private GameStateController _stateController;
+
+    [Inject]
+    private void Construct(GameStateController stateController)
     {
+        _stateController = stateController;
         Disable();
     }
 
@@ -28,7 +32,8 @@ public class Portal : MonoBehaviour
         if (collision.TryGetComponent<Player>(out var player)) 
         {
             _collider.enabled = false;
-            _gameState.WinGame();
+
+            _stateController.SetState(WinState.Name);
         }
     }
 }
