@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerStats
 {
     private int _bombRadius;
@@ -6,6 +8,8 @@ public class PlayerStats
     private int _maxBombRadius;
     private float _maxPlayerMoveSpeed;
 
+    private int _bombAmount;
+
     public float PlayerMoveSpeed => _playerMoveSpeed;
     public int BombRadius => _bombRadius;
 
@@ -13,12 +17,14 @@ public class PlayerStats
         int bombRadius,
         int maxBombRadius, 
         float playerMoveSpeed,
-        float maxPlayerMoveSpeed) 
+        float maxPlayerMoveSpeed,
+        int bombAmount) 
     {
         _bombRadius = bombRadius;
         _playerMoveSpeed = playerMoveSpeed;
         _maxBombRadius = maxBombRadius;
         _maxPlayerMoveSpeed = maxPlayerMoveSpeed;
+        _bombAmount = bombAmount;
     }
 
     public void IncreasePlayerSpeed(float speedAmount) 
@@ -41,5 +47,21 @@ public class PlayerStats
         }
 
         _bombRadius += amount;
+    }
+
+    public bool EnoughBomb() 
+    {
+        if (_bombAmount < 1) 
+        {
+            return false;
+        }
+
+        _bombAmount--;
+        return true;
+    }
+
+    public void ReturnBomb() 
+    {
+        _bombAmount++;
     }
 }

@@ -14,7 +14,13 @@ public class PlayerInstaller : MonoInstaller
 
     private PlayerStats GetPlayerStats()
     {
-        var stats = new PlayerStats(1, 3, 2f, 3.3f);
+        var stats = new PlayerStats(
+            bombRadius: 1,
+            maxBombRadius: 3,
+            playerMoveSpeed: 2f,
+            maxPlayerMoveSpeed: 3.3f,
+            bombAmount: 1);
+
         return stats;
     }
 }

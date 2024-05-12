@@ -6,19 +6,19 @@ public class BarrelSpawner : MonoBehaviour
     [SerializeField] private Barrel _BurrelPrefab;
     private GameObjectFactory _factory;
     private Field _field;
-    //private Player _player;
+    private PlayerStats _playerStats;
     private GameStateController _stateController;
 
     [Inject]
     private void Construct(
-        //Player player, 
+        PlayerStats playerStats,
         GameObjectFactory factory,
         Field field, 
         GameStateController stateController)
     {
         _field = field;
         _factory = factory;
-        //_player = player;
+        _playerStats = playerStats;
         _stateController = stateController;
     }
 
@@ -29,13 +29,13 @@ public class BarrelSpawner : MonoBehaviour
             return;
         }
 
-        //if (_player.Alive == false)
-        //{
-        //    return;
-        //}
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (_playerStats.EnoughBomb() == false)
+            {
+                return;
+            }
+
             var cellTransform = _field.GetClosestCell(this.transform);
             _factory.InstantiatePrefab(_BurrelPrefab, cellTransform.position, Quaternion.identity);
         }

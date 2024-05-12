@@ -60,6 +60,8 @@ public class Barrel : MonoBehaviour, IExplodable
         spawnExplode(Vector3.left);
         
         CreateExplode(transform.position);
+
+        _stats.ReturnBomb();
     }
 
     private void spawnExplode(Vector3 direction) 
