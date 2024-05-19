@@ -7,11 +7,13 @@ public class LoadLevelManager : MonoBehaviour
 
     [SerializeField] private ChosenLevel _chosenLevel;
     private IStorageService _storageService;
+    private TransitionScreen _screen;
 
     [Inject]
-    private void Construct(IStorageService storageService) 
+    private void Construct(IStorageService storageService, TransitionScreen screen) 
     {
         _storageService = storageService;
+        _screen = screen;
     }
 
     public void LoadLevel() 
@@ -20,10 +22,14 @@ public class LoadLevelManager : MonoBehaviour
             "LevelNumber", 
             _chosenLevel.Level, 
             (param) => 
-                { 
-                    SceneManager.LoadScene("SampleScene"); 
+                {
+                    _screen.FadeIn(callBack: LoadScene);
                 }
             );
+    }
 
+    private void LoadScene() 
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }
