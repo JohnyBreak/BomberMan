@@ -97,7 +97,7 @@ public class CharacterController2D : MonoBehaviour
                 //dot = Mathf.Abs(dot);
 
                 penetraitDirection *= penetraitDistance.magnitude;
-                Debug.Log(dot);
+                //Debug.Log(dot);
                 //if (dot != 0)
                 {
                     

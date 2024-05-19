@@ -4,6 +4,7 @@ using Zenject;
 public class LevelBuilder : MonoBehaviour
 {
     private IStorageService _service;
+
     [Inject]
     private void Construct(IStorageService service)
     {

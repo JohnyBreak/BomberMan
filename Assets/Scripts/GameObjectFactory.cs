@@ -13,6 +13,16 @@ public class GameObjectFactory
         return _container.InstantiatePrefab(prefabComponent).GetComponent<T>();
     }
 
+    public GameObject InstantiatePrefab(GameObject prefabGameObject)
+    {
+        return _container.InstantiatePrefab(prefabGameObject);
+    }
+
+    public GameObject InstantiatePrefab(GameObject prefabGameObject, Transform parent)
+    {
+        return _container.InstantiatePrefab(prefabGameObject, parent);
+    }
+
     public T InstantiatePrefab<T>(T prefabComponent, Transform parent) where T : Component
     {
         return _container.InstantiatePrefab(prefabComponent, parent).GetComponent<T>();
