@@ -109,6 +109,7 @@ MonoBehaviour:
   _explodableMask:
     serializedVersion: 2
     m_Bits: 17536
+  _explodeClipName: Bomb
 --- !u!61 &4085950928302459176
 BoxCollider2D:
   m_ObjectHideFlags: 0

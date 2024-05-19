@@ -6,7 +6,7 @@ public class RootInstaller : MonoInstaller
     {
         typeof(GameObjectFactoryInstaller),
         typeof(GameStateInstaller),
-        typeof(LevelInstaller)
+        typeof(LevelInstaller),
     };
 
     public override void InstallBindings()

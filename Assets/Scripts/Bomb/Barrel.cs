@@ -11,16 +11,25 @@ public class Barrel : MonoBehaviour, IExplodable
     //[SerializeField] private int _radius = 2;
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private LayerMask _explodableMask;
+    [SerializeField] private string _explodeClipName;
 
     private Coroutine _waitRoutine;
     private GameObjectFactory _factory;
     private PlayerStats _stats;
+    private AudioManager _audioManager;
+    private AudioDB _audioDB;
 
     [Inject]
-    private void Construct(GameObjectFactory factory, PlayerStats stats)
+    private void Construct(
+        GameObjectFactory factory, 
+        PlayerStats stats, 
+        AudioManager audioManager,
+        AudioDB audioDB)
     {
         _factory = factory;
         _stats = stats;
+        _audioManager = audioManager;
+        _audioDB = audioDB;
     }
 
     private void OnEnable()
@@ -60,6 +69,8 @@ public class Barrel : MonoBehaviour, IExplodable
         spawnExplode(Vector3.left);
         
         CreateExplode(transform.position);
+
+        _audioManager.PlayOneShot(_audioDB.GetClip(_explodeClipName));
 
         _stats.ReturnBomb();
     }
