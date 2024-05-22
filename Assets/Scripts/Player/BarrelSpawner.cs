@@ -36,8 +36,8 @@ public class BarrelSpawner : MonoBehaviour
                 return;
             }
 
-            var cellTransform = _field.GetClosestCell(this.transform);
-            _factory.InstantiatePrefab(_BurrelPrefab, cellTransform.position, Quaternion.identity);
+            var cellPosition = new Vector2(Mathf.Round(this.transform.position.x), Mathf.Round(this.transform.position.y));//_field.GetClosestCellPosition(this.transform.position);
+            _factory.InstantiatePrefab(_BurrelPrefab, cellPosition, Quaternion.identity);
         }
     }
 }

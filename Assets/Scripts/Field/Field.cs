@@ -1,36 +1,44 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Field : MonoBehaviour
+public class Field
 {
-    [SerializeField] private Cell _emptyCell;
-    [SerializeField] private Cell _rockCell;
-    [SerializeField] private Cell _bushCell;
+    private int _columnCount;
+    private int _rowCount;
+    private List<Cell> _cells = new List<Cell>();
 
-    [SerializeField] private int _columnCount;
-    [SerializeField] private int _rowCount;
-    [SerializeField] private Transform[] _cells;
-
-    private void Start()
+    public void SetLevelSize(int columnCount, int rowCount) 
     {
-        SpawnCells();
+        _columnCount = columnCount;
+        _rowCount = rowCount;
     }
 
-    private void SpawnCells() 
+    public void AddCell(Cell cell) 
     {
-        
+        _cells.Add(cell);
     }
 
-    public Transform GetClosestCell(Transform playerTransform) 
+    public Vector2 GetClosestCellPosition(Vector2 playerTransform) 
     {
         float diff = 0;
         float minDiff = float.MaxValue;
         int closestX = 0;
-        var playerPos = playerTransform.position;
+        var playerPos = playerTransform;
         var playerX = playerPos.x;
 
         for (int i = 0; i < _columnCount; i++) 
         {
-            diff = _cells[i % _columnCount].position.x - playerX;
+            if (_cells[i % _columnCount] == null)
+            {
+                continue;
+            }
+
+            if (_cells[i % _columnCount].Occupied) 
+            {
+                continue;
+            }
+
+            diff = _cells[i % _columnCount].X - playerX;
 
             diff = Mathf.Abs(diff);
 
@@ -55,7 +63,18 @@ public class Field : MonoBehaviour
         for (int i = 0; i < _rowCount; i++)
         {
             index = i * _columnCount;
-            diff = _cells[index].position.y - playerY;
+
+            if (_cells[index] == null)
+            {
+                continue;
+            }
+
+            if (_cells[index].Occupied)
+            {
+                continue;
+            }
+
+            diff = _cells[index].Y - playerY;
 
             diff = Mathf.Abs(diff);
 
@@ -73,6 +92,6 @@ public class Field : MonoBehaviour
 
         var N = (_columnCount * closestY) + closestX;
 
-        return _cells[N];
+        return new Vector2(_cells[N].X, _cells[N].Y);
     }
 }

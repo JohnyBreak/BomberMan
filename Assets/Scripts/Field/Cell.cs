@@ -1,8 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Cell : MonoBehaviour
+public class Cell
 {
-    
+    public readonly bool Occupied;
+    public readonly int X;
+    public readonly int Y;
+
+    public Cell(bool occupied, int x, int y) 
+    {
+        Occupied = occupied;
+        X = x; 
+        Y = y;
+    }
 }

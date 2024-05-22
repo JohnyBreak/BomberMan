@@ -10,31 +10,32 @@ public class LevelGenerator : MonoBehaviour
 
     private Dictionary<char, GameObject> m_AssetDict = new();
     private GameObjectFactory _factory;
+    
+
+    //private readonly char[,] m_Level = new char[,]
+    //{
+    //    { '0', '0', '0', '1', '0', '0', '0' },
+    //    { '1', '2', '0', '2', '1', '2', '0' },
+    //    { '0', '1', '0', '0', '0', '0', '0' },
+    //    { '1', '2', '1', '2', '0', '2', '0' },
+    //    { '0', '1', '0', '1', '0', '1', '0' },
+    //    { '0', '2', '0', '2', '1', '2', '0' },
+    //    { '0', '1', '0', '0', '0', '1', '0' },
+    //};
 
     private readonly char[,] m_Level = new char[,]
     {
-        { '0', '0', '0', '1', '0', '0', '0' },
-        { '1', '2', '0', '2', '1', '2', '0' },
-        { '0', '1', '0', '0', '0', '0', '0' },
-        { '1', '2', '1', '2', '0', '2', '0' },
-        { '0', '1', '0', '1', '0', '1', '0' },
-        { '0', '2', '0', '2', '1', '2', '0' },
-        { '0', '1', '0', '0', '0', '1', '0' },
+         { '0', '0', '0', '1', '0', ' ', ' ', '1', '0', '0', '0' },
+         { '1', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
+         { '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0' },
+         { '1', '2', '1', '2', '0', ' ', '0', '2', '0', '2', '0' },
+         { '0', '1', '0', '1', '0', ' ', ' ', '1', '0', '1', '0' },
+         { '0', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
+         { '0', '1', '0', '0', '0', ' ', ' ', '0', '0', '1', '0' },
     };
 
-    // private readonly char[,] m_Level = new char[,]
-    // {
-    //     { '0', '0', '0', '1', '0', ' ', ' ', '1', '0', '0', '0' },
-    //     { '1', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
-    //     { '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0' },
-    //     { '1', '2', '1', '2', '0', ' ', '0', '2', '0', '2', '0' },
-    //     { '0', '1', '0', '1', '0', ' ', ' ', '1', '0', '1', '0' },
-    //     { '0', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
-    //     { '0', '1', '0', '0', '0', ' ', ' ', '0', '0', '1', '0' },
-    // };
-
     [Inject]
-    private void Construct(GameObjectFactory factory) 
+    private void Construct(GameObjectFactory factory)
     {
         _factory = factory;
     }
@@ -43,11 +44,14 @@ public class LevelGenerator : MonoBehaviour
     {
         FillDictionary();
 
+
+
         GenerateLevel();
     }
 
     private void GenerateLevel()
     {
+
         for (var y = 0; y < m_Level.GetLength(0); y++)
         {
             for (var x = 0; x < m_Level.GetLength(1); x++)
@@ -56,7 +60,7 @@ public class LevelGenerator : MonoBehaviour
 
                 if (m_AssetDict.TryGetValue(key, out var asset))
                 {
-                    var tile = _factory.InstantiatePrefab(asset, m_SpawnParent);//Instantiate(asset, m_SpawnParent);
+                    var tile = _factory.InstantiatePrefab(asset, m_SpawnParent);
                     tile.transform.position = new Vector2(x, -y);
                 }
             }
