@@ -3,8 +3,8 @@ using Zenject;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private CharacterController2D _characterController;
-
+    //[SerializeField] private CharacterController2D _characterController;
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private Animator _animator;
 
     private int _verticalHash = Animator.StringToHash("Vertical");
@@ -20,10 +20,11 @@ public class Player : MonoBehaviour
     private GameStateController _gameStateController;
 
     [Inject]
-    private void Construct(PlayerStats stats, GameStateController stateController)
+    private void Construct(PlayerStats stats, GameStateController stateController, PlayerProvider provider)
     {
         _stats = stats;
         _gameStateController = stateController;
+        provider.SetPlayer(this);
     }
 
     public void Kill()
@@ -43,8 +44,14 @@ public class Player : MonoBehaviour
 
         HandleAnimations();
 
-        Move();
+        //Move();
+        _rigidbody.velocity = _moveVector * _stats.PlayerMoveSpeed;
     }
+
+    //private void FixedUpdate()
+    //{
+    //    _rigidbody.MovePosition(_rigidbody.position + _moveVector * Time.fixedDeltaTime * _stats.PlayerMoveSpeed);
+    //}
 
     private void GetInput()
     {
@@ -67,8 +74,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Move()
-    {
-        _characterController.Move(_moveVector);
-    }
+    //private void Move()
+    //{
+    //    _characterController.Move(_moveVector);
+    //}
 }

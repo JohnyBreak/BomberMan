@@ -2895,7 +2895,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5286782, y: -0.50844556, z: -24.38598}
+  m_LocalPosition: {x: 2.2076714, y: -0.4356125, z: -24.38598}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3349,6 +3349,7 @@ GameObject:
   - component: {fileID: 586944685}
   - component: {fileID: 586944684}
   - component: {fileID: 586944683}
+  - component: {fileID: 586944686}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -3370,7 +3371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 2063144380}
+  m_BoundingShape2D: {fileID: 2063144382}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!114 &586944684
@@ -3428,6 +3429,19 @@ Transform:
   - {fileID: 1465207418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &586944686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586944682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1f6cf2faef0d44f9c668bbd507c0e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _virtualCamera: {fileID: 586944684}
 --- !u!1 &597685427
 GameObject:
   m_ObjectHideFlags: 0
@@ -7613,7 +7627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2f04fe69946b04b870350884fbdecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
 --- !u!114 &984001800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9821,9 +9834,9 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
@@ -12906,7 +12919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2063144381}
-  - component: {fileID: 2063144380}
+  - component: {fileID: 2063144382}
   m_Layer: 0
   m_Name: LevelBounds
   m_TagString: Untagged
@@ -12914,8 +12927,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!68 &2063144380
-EdgeCollider2D:
+--- !u!4 &2063144381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063144379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.54, y: 11.594709, z: -0.1718998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &2063144382
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -12947,32 +12975,22 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 1.3230515, y: -11.161669}
-  - {x: 1.4125004, y: -18.44413}
-  - {x: 12.407881, y: -18.373182}
-  - {x: 12.61165, y: -11.164815}
-  - {x: 1.2772753, y: -11.158743}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!4 &2063144381
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063144379}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8898027, y: 11.594709, z: -0.1718998}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+    m_Paths:
+    - - {x: 10.170127, y: -6.276987}
+      - {x: -9.632986, y: -6.3065124}
+      - {x: -9.331715, y: -21.761885}
+      - {x: 10.192048, y: -21.671097}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2072632628
 GameObject:
   m_ObjectHideFlags: 0

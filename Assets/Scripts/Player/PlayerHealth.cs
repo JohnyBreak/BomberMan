@@ -9,13 +9,25 @@ public class PlayerHealth : MonoBehaviour, IExplodable
 
     [Inject]
     private void Construct(
-        Player player, 
+        PlayerProvider provider, 
         PlayerDeadText playerDeadText,
         GameLose lose) 
     {
-        _player = player;
         _deadText = playerDeadText;
         _lose = lose;
+
+        Player player = provider.GetPlayer();
+
+        if (player == null) 
+        {
+            provider.OnPlayerSetted += (newPlayer) =>
+            {
+                _player = newPlayer;
+            };
+            return;
+        }
+
+        _player = player;
     }
 
     public void Explode()
