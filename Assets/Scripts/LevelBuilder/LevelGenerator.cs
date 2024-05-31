@@ -25,13 +25,15 @@ public class LevelGenerator : MonoBehaviour
 
     private readonly char[,] m_Level = new char[,]
     {
-         { '@', '0', '0', '1', '0', ' ', ' ', '1', '0', '0', '0' },
-         { '1', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
-         { '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0' },
-         { '1', '2', '1', '2', '0', ' ', '0', '2', '0', '2', '0' },
-         { '0', '1', '0', '1', '0', ' ', ' ', '1', '0', '1', '0' },
-         { '0', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' },
-         { '0', '1', '0', '0', '0', ' ', ' ', '0', '0', '1', '0' },
+        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' '},
+        { ' ', '@', '0', '0', '1', '0', ' ', ' ', '1', 'T', '0', '1' , ' '},
+        { ' ', '1', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' , ' '},
+        { ' ', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0' , ' '},
+        { ' ', '1', '2', '1', '2', '0', ' ', '0', '2', '0', '2', '0' , ' '},
+        { ' ', '0', '1', '0', '1', '0', ' ', ' ', '1', '0', '1', '0' , ' '},
+        { ' ', '0', '2', '0', '2', '1', ' ', ' ', '2', '1', '2', '0' , ' '},
+        { ' ', '0', '1', '0', 'T', '0', ' ', ' ', 'P', '0', '1', '0' , ' '},
+        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' '},
     };
 
     [Inject]
@@ -56,14 +58,26 @@ public class LevelGenerator : MonoBehaviour
         {
             for (var x = 0; x < m_Level.GetLength(1); x++)
             {
-                var key = m_Level[y, x];
+                char key = m_Level[y, x];
 
-                if (m_AssetDict.TryGetValue(key, out var asset))
+                Vector2 currentPosition = new Vector2(x, -y);
+
+                if (key != ' ' && key != '0')
                 {
-                    var tile = _factory.InstantiatePrefab(asset, m_SpawnParent);
-                    tile.transform.position = new Vector2(x, -y);
+                    CreateTile('0', currentPosition);
                 }
+
+                CreateTile(key, currentPosition);
             }
+        }
+    }
+
+    private void CreateTile(char key, Vector2 position) 
+    {
+        if (m_AssetDict.TryGetValue(key, out var asset))
+        {
+            var tile = _factory.InstantiatePrefab(asset, m_SpawnParent);
+            tile.transform.position = position;
         }
     }
 

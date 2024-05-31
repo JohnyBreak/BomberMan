@@ -29,7 +29,7 @@ public class BarrelSpawner : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             if (_playerStats.EnoughBomb() == false)
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 public class LevelSystem
@@ -16,6 +17,7 @@ public class LevelSystem
 
     public void RegisterDestructable(DestructionTarget target) 
     {
+        Debug.LogError(target.name);
         _targets.Add(target);
         currentTargetsCount = _targets.Count;
     }
@@ -28,10 +30,12 @@ public class LevelSystem
         }
         
         currentTargetsCount--;
-
+        Debug.LogError(currentTargetsCount);
         if (currentTargetsCount <= 0) 
         {
-            _portal.Enable();
+            Debug.LogError("enable");
+            GameObject.FindObjectOfType<Portal>(true).Enable();
+            //_portal.Enable();
         }
 
     }

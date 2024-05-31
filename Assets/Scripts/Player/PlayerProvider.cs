@@ -15,7 +15,6 @@ public class PlayerProvider
     public void SetPlayer(Player player) 
     {
         _player = player;
-        Debug.Log("_player");
         OnPlayerSetted?.Invoke(_player);
     }
 }

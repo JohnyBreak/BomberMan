@@ -18,7 +18,7 @@ public class PlayerInstaller : MonoInstaller
         var stats = new PlayerStats(
             bombRadius: 1,
             maxBombRadius: 3,
-            playerMoveSpeed: 2f,
+            playerMoveSpeed: 1.5f,
             maxPlayerMoveSpeed: 3.3f,
             bombAmount: 1);
 
