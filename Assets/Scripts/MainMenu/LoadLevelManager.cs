@@ -30,6 +30,6 @@ public class LoadLevelManager : MonoBehaviour
 
     private void LoadScene() 
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("CoreScene");
     }
 }
