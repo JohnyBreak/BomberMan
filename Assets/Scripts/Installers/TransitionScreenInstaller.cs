@@ -3,12 +3,12 @@ using Zenject;
 
 public class TransitionScreenInstaller : MonoInstaller
 {
-    [SerializeField] private TransitionScreen _screen;
+    [SerializeField] private Transition _screen;
 
     public override void InstallBindings()
     {
-        var screen = Container.InstantiatePrefabForComponent<TransitionScreen>(_screen);
-        Container.Bind<TransitionScreen>().FromInstance(screen).AsSingle();
+        var screen = Container.InstantiatePrefabForComponent<Transition>(_screen);
+        Container.Bind<Transition>().FromInstance(screen).AsSingle();
         DontDestroyOnLoad(screen.gameObject);
     }
 }

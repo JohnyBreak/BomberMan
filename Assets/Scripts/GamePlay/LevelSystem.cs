@@ -17,7 +17,6 @@ public class LevelSystem
 
     public void RegisterDestructable(DestructionTarget target) 
     {
-        Debug.LogError(target.name);
         _targets.Add(target);
         currentTargetsCount = _targets.Count;
     }
@@ -33,9 +32,7 @@ public class LevelSystem
         Debug.LogError(currentTargetsCount);
         if (currentTargetsCount <= 0) 
         {
-            Debug.LogError("enable");
             GameObject.FindObjectOfType<Portal>(true).Enable();
-            //_portal.Enable();
         }
 
     }

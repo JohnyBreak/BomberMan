@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class SceneStarter : MonoBehaviour
 {
-    private TransitionScreen _screen;
+    private Transition _screen;
 
     [Inject]
-    private void Construct(TransitionScreen screen) 
+    private void Construct(Transition screen) 
     {
         _screen = screen;
     }

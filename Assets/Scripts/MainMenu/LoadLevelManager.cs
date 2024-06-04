@@ -7,10 +7,10 @@ public class LoadLevelManager : MonoBehaviour
 
     [SerializeField] private ChosenLevel _chosenLevel;
     private IStorageService _storageService;
-    private TransitionScreen _screen;
+    private Transition _screen;
 
     [Inject]
-    private void Construct(IStorageService storageService, TransitionScreen screen) 
+    private void Construct(IStorageService storageService, Transition screen) 
     {
         _storageService = storageService;
         _screen = screen;
