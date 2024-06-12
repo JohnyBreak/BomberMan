@@ -16,7 +16,7 @@ public class TimerStarter : MonoBehaviour
         _gameStateMachine = gameStateMachine;
     }
 
-    private void Start()
+    public void Init()
     {
         _gameStateMachine.StateChangedEvent += OnStateChanged;
 

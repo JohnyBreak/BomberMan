@@ -42,12 +42,9 @@ public class LevelGenerator : MonoBehaviour
         _factory = factory;
     }
 
-    void Start()
+    public void Init()
     {
         FillDictionary();
-
-
-
         GenerateLevel();
     }
 

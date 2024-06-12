@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +16,7 @@ public class MusicStarter : MonoBehaviour
         _audioDB = audioDB;
     }
 
-    void Start()
+    public void Init()
     {
         var clip = _audioDB.GetClip(_musicCategoryName);
 
