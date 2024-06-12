@@ -11,6 +11,7 @@ public class WinState : IState
 
     public void Enter()
     {
+        _gameStateMachine.Enter<LoadLevelState, LoadLevelPayLoad>(new LoadLevelPayLoad("MainScene", null));
     }
 
     public void Exit()

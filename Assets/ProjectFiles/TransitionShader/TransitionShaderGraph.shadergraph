@@ -13,7 +13,7 @@
             "m_Id": "fa3a16c7cc37450e83e17a538453d07e"
         },
         {
-            "m_Id": "5fee763e53f84b7c94b4474944929548"
+            "m_Id": "b866b0ec733d43e68e8dfecde2c33246"
         }
     ],
     "m_Keywords": [],
@@ -92,6 +92,9 @@
         },
         {
             "m_Id": "fe5b3035edf04c83b09c5150c9bb8e3b"
+        },
+        {
+            "m_Id": "14ec7c79aeca4deeb7fe97cb4c4fca70"
         }
     ],
     "m_GroupDatas": [],
@@ -510,6 +513,43 @@
     },
     "m_Labels": [],
     "m_Channel": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DAssetNode",
+    "m_ObjectId": "14ec7c79aeca4deeb7fe97cb4c4fca70",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Texture 2D Asset",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -296.0,
+            "y": 238.0000457763672,
+            "width": 133.99998474121095,
+            "height": 34.00004577636719
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "9b6402b8e23f45dbb70c8c8a02991d91"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Texture": {
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_Guid": ""
+    }
 }
 
 {
@@ -1247,36 +1287,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "5fee763e53f84b7c94b4474944929548",
-    "m_Guid": {
-        "m_GuidSerialized": "3acbc7e4-c2d6-43ae-826b-90db172ad2bc"
-    },
-    "m_Name": "_MainTex",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "_MainTex",
-    "m_DefaultReferenceName": "_MainTex",
-    "m_OverrideReferenceName": "_MainTex",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.TilingAndOffsetNode",
     "m_ObjectId": "68017df1f9904231b6e2f5573a7166ef",
     "m_Group": {
@@ -1617,6 +1627,19 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
+    "m_ObjectId": "9b6402b8e23f45dbb70c8c8a02991d91",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "9b912a4bc7414a2381f7f96823ca765d",
     "m_Id": 0,
@@ -1637,9 +1660,6 @@
     "m_Name": "",
     "m_ChildObjectList": [
         {
-            "m_Id": "5fee763e53f84b7c94b4474944929548"
-        },
-        {
             "m_Id": "5e4b9c7ac5b8482d818e19fcf5f3674c"
         },
         {
@@ -1647,6 +1667,9 @@
         },
         {
             "m_Id": "fa3a16c7cc37450e83e17a538453d07e"
+        },
+        {
+            "m_Id": "b866b0ec733d43e68e8dfecde2c33246"
         }
     ]
 }
@@ -1790,6 +1813,36 @@
         "w": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "b866b0ec733d43e68e8dfecde2c33246",
+    "m_Guid": {
+        "m_GuidSerialized": "7c97828e-57fc-44c2-a166-de9af71dffb5"
+    },
+    "m_Name": "MainTex",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "MainTex",
+    "m_DefaultReferenceName": "_MainTex",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {

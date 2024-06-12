@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class AssetProvider : MonoBehaviour
+public class AssetProvider
 {
     private readonly Dictionary<string, AsyncOperationHandle> m_CompletedCache = new();
     private readonly Dictionary<string, List<AsyncOperationHandle>> m_Handles = new();
@@ -162,7 +162,7 @@ public class AssetProvider : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
         CleanUp();
     }

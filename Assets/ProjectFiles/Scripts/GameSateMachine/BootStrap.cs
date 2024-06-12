@@ -1,9 +1,8 @@
 using GameState;
 using UnityEngine;
-using Utils;
 using Zenject;
 
-public class BootStrap : MonoBehaviour, ICoroutineRunner
+public class BootStrap : MonoBehaviour
 {
     private GameStateMachine _stateMachine;
 
@@ -13,9 +12,12 @@ public class BootStrap : MonoBehaviour, ICoroutineRunner
         _stateMachine = gameStateMachine;
     }
 
-    void Start()
+    private void Start()
     {
-        _stateMachine.Enter<BootstrapState>();
         DontDestroyOnLoad(this.gameObject);
+
+        _stateMachine.Initialize();
+
+        _stateMachine.Enter<BootstrapState>();
     }
 }
