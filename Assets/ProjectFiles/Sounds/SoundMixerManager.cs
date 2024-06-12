@@ -1,6 +1,10 @@
+using DG.Tweening;
+using GameState;
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Zenject;
 
 public class SoundMixerManager : MonoBehaviour
 {
@@ -8,15 +12,17 @@ public class SoundMixerManager : MonoBehaviour
     [SerializeField] private float _startValue;
     [SerializeField] private Slider _slider;
 
-    private void Awake()
-    {
-        _slider.value = _startValue;
+    private GameStateMachine _machine;
 
-        SetMasterVolume(_slider.value);
-        SetMusicVolume(_slider.value);
+    [Inject]
+    private void Construct(GameStateMachine machine)
+    {
+        _machine = machine;
+
+
     }
 
-    public void SetMasterVolume(float level) 
+    public void SetMasterVolume(float level)
     {
         _mixer.SetFloat("MasterVolume", Mathf.Log10(level) * 20f);
     }
@@ -29,5 +35,35 @@ public class SoundMixerManager : MonoBehaviour
     public void SetSoundVolume(float level)
     {
         _mixer.SetFloat("SoundVolume", Mathf.Log10(level) * 20f);
+    }
+
+    private void Awake()
+    {
+        _slider.value = _startValue;
+
+        SetMasterVolume(_slider.value);
+        SetMusicVolume(_slider.value);
+
+        _machine.StateChangedEvent += OnStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        _machine.StateChangedEvent -= OnStateChanged;
+    }
+
+    private void OnStateChanged(IExitableState state)
+    {
+        if (state is GamePauseState)
+        {
+            _mixer.DOPause();
+            return;
+        }
+
+        if (state is GamePlayState)
+        {
+            _mixer.DOPlay();
+            return;
+        }
     }
 }

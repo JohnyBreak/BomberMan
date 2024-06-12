@@ -1,4 +1,5 @@
 using GameState;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -35,11 +36,13 @@ public class Menu : MonoBehaviour
 
     public void Show()
     {
+        _machine.Enter<GamePauseState>();
         gameObject.SetActive(true);
     }
 
     public void Hide() 
     {
+        _machine.Enter<GamePlayState>();
         gameObject.SetActive(false);
     }
 

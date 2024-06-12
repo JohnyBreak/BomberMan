@@ -1,3 +1,4 @@
+using GameState;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -8,7 +9,6 @@ public class Barrel : MonoBehaviour, IExplodable
     [SerializeField] private float _lifeTime = 3;
     [SerializeField] private float _damageRadius = .8f;
     [SerializeField] private Explode _explode;
-    //[SerializeField] private int _radius = 2;
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private LayerMask _explodableMask;
     [SerializeField] private string _explodeClipName;
@@ -18,18 +18,44 @@ public class Barrel : MonoBehaviour, IExplodable
     private PlayerStats _stats;
     private AudioManager _audioManager;
     private AudioDB _audioDB;
+    private GameStateMachine _gameStateMachine;
 
     [Inject]
     private void Construct(
         GameObjectFactory factory, 
         PlayerStats stats, 
         AudioManager audioManager,
-        AudioDB audioDB)
+        AudioDB audioDB,
+        GameStateMachine gameStateMachine)
     {
         _factory = factory;
         _stats = stats;
         _audioManager = audioManager;
         _audioDB = audioDB;
+        _gameStateMachine = gameStateMachine;
+    }
+
+    public void Explode()
+    {
+        if (_waitRoutine != null)
+        {
+            StopCoroutine(_waitRoutine);
+            _waitRoutine = null;
+        }
+
+        Destroy(gameObject);
+
+
+        SpawnExplode(Vector3.up);
+        SpawnExplode(Vector3.right);
+        SpawnExplode(Vector3.down);
+        SpawnExplode(Vector3.left);
+
+        CreateExplode(transform.position);
+
+        _audioManager.PlayOneShot(_audioDB.GetClip(_explodeClipName));
+
+        _stats.ReturnBomb();
     }
 
     private void OnEnable()
@@ -47,35 +73,25 @@ public class Barrel : MonoBehaviour, IExplodable
 
     private IEnumerator WaitRoutine()
     {
-        yield return new WaitForSeconds(_lifeTime);
+        //yield return new WaitForSeconds(_lifeTime);
+        float time = 0;
+        while (time < _lifeTime)
+        {
+            if (_gameStateMachine.IsCurrentState<GamePlayState>() == false)
+            {
+                yield return null;
+                continue;
+            }
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
 
         Explode();
     }
 
-    public void Explode() 
-    {
-        if (_waitRoutine != null) 
-        {
-            StopCoroutine(_waitRoutine);
-            _waitRoutine = null;
-        }
-
-        Destroy(gameObject);
-        
-
-        spawnExplode(Vector3.up);
-        spawnExplode(Vector3.right);
-        spawnExplode(Vector3.down);
-        spawnExplode(Vector3.left);
-        
-        CreateExplode(transform.position);
-
-        _audioManager.PlayOneShot(_audioDB.GetClip(_explodeClipName));
-
-        _stats.ReturnBomb();
-    }
-
-    private void spawnExplode(Vector3 direction) 
+    private void SpawnExplode(Vector3 direction) 
     {
         for (int i = 0; i < _stats.BombRadius; i++)//_radius; i++)
         {

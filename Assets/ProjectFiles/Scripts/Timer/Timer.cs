@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-using UnityEngine;
 
 public class Timer
 {
@@ -35,6 +34,13 @@ public class Timer
 
     public void Resume()
     {
+        bool active = _tween.IsActive();
+
+        if (!active)
+        {
+            return;
+        }
+
         _tween.Play();
     }
 

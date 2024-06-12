@@ -1,5 +1,7 @@
+using GameState;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class Explode : MonoBehaviour
 {
@@ -7,6 +9,14 @@ public class Explode : MonoBehaviour
     [SerializeField]  private LayerMask _mask;
 
     private WaitForSeconds _sleepTime;
+    private GameStateMachine _gameStateMachine;
+
+    [Inject]
+    private void Construct(
+        GameStateMachine gameStateMachine)
+    {
+        _gameStateMachine = gameStateMachine;
+    }
 
     private void Start()
     {
@@ -32,6 +42,12 @@ public class Explode : MonoBehaviour
     {
         while (true)
         {
+            if (_gameStateMachine.IsCurrentState<GamePlayState>() == false)
+            {
+                yield return null;
+                continue;
+            }
+
             yield return _sleepTime;
 
             var result = Physics2D.OverlapBox(transform.position, Vector2.one * 0.9f, 0, _mask);
@@ -50,7 +66,21 @@ public class Explode : MonoBehaviour
 
     private IEnumerator WaitRoutine()
     {
-        yield return new WaitForSeconds(_lifeTime);
+        //yield return new WaitForSeconds(_lifeTime);
+        
+        float time = 0;
+        while (time < _lifeTime)
+        {
+            if (_gameStateMachine.IsCurrentState<GamePlayState>() == false)
+            {
+                yield return null;
+                continue;
+            }
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
 
         Destroy(gameObject);
     }

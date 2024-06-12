@@ -6,6 +6,8 @@ namespace GameState
 {
     public class GameStateMachine
     {
+        public Action<IExitableState> StateChangedEvent;
+
         private Dictionary<Type, IExitableState> m_States;
         private IExitableState m_ActiveState;
         private readonly StateFactory _stateFactory;
@@ -25,7 +27,8 @@ namespace GameState
                 [typeof(LoseState)] = _stateFactory.CreateState<LoseState>(),
                 [typeof(GamePlayState)] = _stateFactory.CreateState<GamePlayState>(),
                 [typeof(ReloadLevelState)] = _stateFactory.CreateState<ReloadLevelState>(),
-
+                [typeof(TimeOutState)] = _stateFactory.CreateState<TimeOutState>(),
+                [typeof(GamePauseState)] = _stateFactory.CreateState<GamePauseState>(),
             };
         }
 
@@ -33,12 +36,14 @@ namespace GameState
         {
             IState state = ChangeState<TState>();
             state.Enter();
+            StateChangedEvent?.Invoke(state);
         }
         
         public void Enter<TState, TPayload>(TPayload payload) where TState :class, IPayLoadState<TPayload>
         {
             TState state = ChangeState<TState>();
             state.Enter(payload);
+            StateChangedEvent?.Invoke(state);
         }
 
         public bool IsCurrentState<T>() where T: class, IExitableState

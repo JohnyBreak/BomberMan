@@ -19,6 +19,7 @@ public class GameRunner : MonoBehaviour
 
         if(result != null) 
         {
+            Destroy(this.gameObject);
             return;
         }
 
