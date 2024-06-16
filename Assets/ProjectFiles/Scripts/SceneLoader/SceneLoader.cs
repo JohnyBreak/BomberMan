@@ -18,10 +18,11 @@ namespace Utils
 
         public void Load(string sceneName, Action onLoaded = null)
         {
-            _transition.FadeIn(() => 
-            {
-                m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoaded));
-            });
+            m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoaded));
+            //_transition.FadeIn(() => 
+            //{
+            //    m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoaded));
+            //});
         }
 
         private IEnumerator LoadScene(string sceneName, Action onLoaded = null, bool allowSameScene = false)
@@ -30,10 +31,12 @@ namespace Utils
             { 
                 if (SceneManager.GetActiveScene().name == sceneName)
                 {
-                    _transition.FadeOut(() =>
-                    {
-                        onLoaded?.Invoke();
-                    });
+                    onLoaded?.Invoke();
+
+                    //_transition.FadeOut(() =>
+                    //{
+                    //    onLoaded?.Invoke();
+                    //});
 
                 
                     yield break;
@@ -47,18 +50,20 @@ namespace Utils
                 yield return null;
             }
 
-            _transition.FadeOut(() =>
-            {
-                onLoaded?.Invoke();
-            });
+            onLoaded?.Invoke();
+            //_transition.FadeOut(() =>
+            //{
+            //    onLoaded?.Invoke();
+            //});
         }
 
         internal void ReLoad(string sceneName, Action onLoadCallback)
         {
-            _transition.FadeIn(() =>
-            {
-                m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoadCallback, true));
-            });
+            m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoadCallback, true));
+            //_transition.FadeIn(() =>
+            //{
+            //    m_CoroutineRunner.StartCoroutine(LoadScene(sceneName, onLoadCallback, true));
+            //});
         }
     }
 }

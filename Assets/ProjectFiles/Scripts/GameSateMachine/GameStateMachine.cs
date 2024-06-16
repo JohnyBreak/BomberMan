@@ -29,6 +29,8 @@ namespace GameState
                 [typeof(ReloadLevelState)] = _stateFactory.CreateState<ReloadLevelState>(),
                 [typeof(TimeOutState)] = _stateFactory.CreateState<TimeOutState>(),
                 [typeof(GamePauseState)] = _stateFactory.CreateState<GamePauseState>(),
+                [typeof(GamePrepareState)] = _stateFactory.CreateState<GamePrepareState>(),
+                
             };
         }
 

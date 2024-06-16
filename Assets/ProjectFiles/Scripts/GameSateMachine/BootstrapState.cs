@@ -6,11 +6,12 @@ namespace GameState
     {
         private readonly GameStateMachine m_StateMachine;
         private readonly SceneLoader m_SceneLoader;
-        
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        private readonly Transition _transition;
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, Transition transition)
         {
             m_StateMachine = stateMachine;
             m_SceneLoader = sceneLoader;
+            _transition = transition;
         }
 
         public void Enter()
@@ -20,7 +21,10 @@ namespace GameState
 
         private void EnterLoadLevel()
         {
-            m_StateMachine.Enter<LoadLevelState, LoadLevelPayLoad>(new LoadLevelPayLoad("MainScene", null));
+            m_StateMachine.Enter<LoadLevelState, LoadLevelPayLoad>(new LoadLevelPayLoad("MainScene", () => 
+            {
+                _transition.FadeOut();
+            }));
         }
 
         public void Exit()

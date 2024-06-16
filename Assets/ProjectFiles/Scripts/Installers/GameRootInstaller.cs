@@ -25,6 +25,7 @@ public class GameRootInstaller : MonoInstaller
         Container.Bind<ReloadLevelState>().FromNew().AsSingle().NonLazy();
         Container.Bind<TimeOutState>().FromNew().AsSingle().NonLazy();
         Container.Bind<GamePauseState>().FromNew().AsSingle().NonLazy();
+        Container.Bind<GamePrepareState>().FromNew().AsSingle().NonLazy();
 
         Container.Bind<AssetProvider>().FromNew().AsSingle().NonLazy();
 
@@ -46,7 +47,7 @@ public class GameRootInstaller : MonoInstaller
     {
         var transition = context.Container.InstantiatePrefabForComponent<Transition>(_screen);
 
-        transition.SetValue(0);
+        transition.SetValue(1);
         transition.transform.SetParent(null, false);
         DontDestroyOnLoad(transition.gameObject);
         return transition;
