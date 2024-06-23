@@ -6,7 +6,6 @@ public class BarrelSpawner : MonoBehaviour
 {
     [SerializeField] private Barrel _BurrelPrefab;
     private GameObjectFactory _factory;
-    private Field _field;
     private PlayerStats _playerStats;
     private GameStateMachine _stateController;
 
@@ -14,10 +13,8 @@ public class BarrelSpawner : MonoBehaviour
     private void Construct(
         PlayerStats playerStats,
         GameObjectFactory factory,
-        Field field,
         GameStateMachine stateController)
     {
-        _field = field;
         _factory = factory;
         _playerStats = playerStats;
         _stateController = stateController;
@@ -37,7 +34,7 @@ public class BarrelSpawner : MonoBehaviour
                 return;
             }
 
-            var cellPosition = new Vector2(Mathf.Round(this.transform.position.x), Mathf.Round(this.transform.position.y));//_field.GetClosestCellPosition(this.transform.position);
+            var cellPosition = new Vector2(Mathf.Round(this.transform.position.x), Mathf.Round(this.transform.position.y));
             _factory.InstantiatePrefab(_BurrelPrefab, cellPosition, Quaternion.identity);
         }
     }
