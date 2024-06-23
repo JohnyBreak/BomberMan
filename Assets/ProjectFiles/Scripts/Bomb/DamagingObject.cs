@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
-public class Explode : MonoBehaviour
+public class DamagingObject : MonoBehaviour
 {
     [SerializeField] private float _lifeTime = 3;
     [SerializeField]  private LayerMask _mask;
@@ -22,7 +22,11 @@ public class Explode : MonoBehaviour
     {
         _sleepTime = new WaitForSeconds(0.2f);
 
-        StartCoroutine(WaitRoutine());
+        if(_lifeTime > 0)
+        {
+            StartCoroutine(WaitRoutine());
+        }
+
         StartCoroutine(DamageRoutine());
 
         var result = Physics2D.OverlapBox(transform.position, Vector2.one * 0.9f, 0, _mask);
@@ -51,7 +55,7 @@ public class Explode : MonoBehaviour
             yield return _sleepTime;
 
             var result = Physics2D.OverlapBox(transform.position, Vector2.one * 0.9f, 0, _mask);
-
+            
             if (result == null)
             {
                 continue;

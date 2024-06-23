@@ -102,13 +102,13 @@ MonoBehaviour:
   _boxCollider: {fileID: 4085950928302459176}
   _lifeTime: 3
   _damageRadius: 0.8
-  _explode: {fileID: 8556854473827177229, guid: 0bb8dd29a8d096649ad2ab3d88f27e77, type: 3}
+  _explode: {fileID: 6201832223087198833, guid: 0bb8dd29a8d096649ad2ab3d88f27e77, type: 3}
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 832
   _explodableMask:
     serializedVersion: 2
-    m_Bits: 17536
+    m_Bits: 115840
   _explodeClipName: Bomb
 --- !u!61 &4085950928302459176
 BoxCollider2D:

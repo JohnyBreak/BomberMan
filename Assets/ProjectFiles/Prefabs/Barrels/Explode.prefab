@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2104554238055181363}
   - component: {fileID: 1874498612429337213}
   - component: {fileID: 5753779128883005854}
-  - component: {fileID: 8556854473827177229}
+  - component: {fileID: 6201832223087198833}
   m_Layer: 9
   m_Name: Explode
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &8556854473827177229
+--- !u!114 &6201832223087198833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3156192025379181344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45669c1f14cd3b24f8f041e5ef39629b, type: 3}
+  m_Script: {fileID: 11500000, guid: 139f335aab46dab408250406a14f8848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifeTime: 1.5
+  _lifeTime: 3
   _mask:
     serializedVersion: 2
-    m_Bits: 19584
+    m_Bits: 98304

@@ -8,7 +8,7 @@ public class Barrel : MonoBehaviour, IExplodable
     [SerializeField] private BoxCollider2D _boxCollider;
     [SerializeField] private float _lifeTime = 3;
     [SerializeField] private float _damageRadius = .8f;
-    [SerializeField] private Explode _explode;
+    [SerializeField] private DamagingObject _explode;
     [SerializeField] private LayerMask _obstacleMask;
     [SerializeField] private LayerMask _explodableMask;
     [SerializeField] private string _explodeClipName;
@@ -119,7 +119,7 @@ public class Barrel : MonoBehaviour, IExplodable
         }
     }
 
-    private Explode CreateExplode(Vector3 position) 
+    private DamagingObject CreateExplode(Vector3 position) 
     {
         return _factory.InstantiatePrefab(_explode, position, Quaternion.identity);
     } 

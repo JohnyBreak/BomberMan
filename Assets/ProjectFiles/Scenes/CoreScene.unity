@@ -2124,8 +2124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _durationUnit:
-    Minutes: 0
-    Seconds: 10
+    Minutes: 3
+    Seconds: 0
 --- !u!4 &1252782755
 Transform:
   m_ObjectHideFlags: 0
@@ -2611,6 +2611,8 @@ MonoBehaviour:
     m_Asset: {fileID: 4285766893960351726, guid: 2bcc3c3639053e74c9b08896aac7eb10, type: 3}
   - m_Key: 80
     m_Asset: {fileID: 8075326677672507773, guid: fb0165b637ece5d4c8494bce4eb44a63, type: 3}
+  - m_Key: 69
+    m_Asset: {fileID: 817739301732072673, guid: 5f4ba196644981243a730450eb55d748, type: 3}
 --- !u!1 &1867775790
 GameObject:
   m_ObjectHideFlags: 0
