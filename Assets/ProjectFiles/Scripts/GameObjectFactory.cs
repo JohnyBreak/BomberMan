@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+
 public class GameObjectFactory
 {
     private readonly DiContainer _container;

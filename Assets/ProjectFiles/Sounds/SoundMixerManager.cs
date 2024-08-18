@@ -1,6 +1,5 @@
 using DG.Tweening;
 using GameState;
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -39,10 +38,13 @@ public class SoundMixerManager : MonoBehaviour
 
     private void Awake()
     {
-        _slider.value = _startValue;
+        if(_slider != null) 
+        { 
+            _slider.value = _startValue;
 
-        SetMasterVolume(_slider.value);
-        SetMusicVolume(_slider.value);
+            SetMasterVolume(_slider.value);
+            SetMusicVolume(_slider.value);
+        }
 
         _machine.StateChangedEvent += OnStateChanged;
     }

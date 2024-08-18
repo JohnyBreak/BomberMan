@@ -1,26 +1,29 @@
 using GameState;
-using UnityEngine;
-using Zenject;
 
-public class TimerStarter : MonoBehaviour
+public class TimerStarter
 {
-    [SerializeField] private TimeDuration _durationUnit;
+    private TimeDuration _durationUnit = new TimeDuration(3,0);
 
     private Timer _timer;
     private GameStateMachine _gameStateMachine;
 
-    [Inject]
-    private void Construct(Timer timer, GameStateMachine gameStateMachine)
+    public TimerStarter(Timer timer, GameStateMachine gameStateMachine)
     {
         _timer = timer;
         _gameStateMachine = gameStateMachine;
+        _gameStateMachine.StateChangedEvent += OnStateChanged;
     }
 
-    public void Init()
+    public void InitTimer(TimeDuration durationUnit)
     {
-        _gameStateMachine.StateChangedEvent += OnStateChanged;
+        _durationUnit = durationUnit;
 
-        _timer.Start((int)_durationUnit.GetTotalSeconds(), 0, null, OnComplite);    
+        _timer.Init((int)_durationUnit.GetTotalSeconds(), 0, null, OnComplite);
+    }
+
+    public void StartTimer()
+    {
+        _timer.Start();
     }
 
 
@@ -44,7 +47,7 @@ public class TimerStarter : MonoBehaviour
         _gameStateMachine.Enter<TimeOutState>();
     }
 
-    private void OnDestroy()
+    public void Dispose()
     {
         _gameStateMachine.StateChangedEvent -= OnStateChanged;
         _timer.Stop();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
-    public event Action<GameObject> HeadCollisionObject;
+    //public event Action<GameObject> HeadCollisionObject;
 
     [SerializeField] private Collider2D _playerCollider;
 

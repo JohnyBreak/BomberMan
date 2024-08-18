@@ -5,11 +5,13 @@ public class GamePrepareState : IState
 {
     private readonly GameStateMachine m_StateMachine;
     private readonly Transition _transition;
+    private readonly LevelStarter _levelStarter;
 
-    public GamePrepareState(GameStateMachine stateMachine,Transition transition)
+    public GamePrepareState(GameStateMachine stateMachine,Transition transition, LevelStarter levelStarter)
     {
         m_StateMachine = stateMachine;
         _transition = transition;
+        _levelStarter = levelStarter;
     }
 
     public void Enter()
@@ -18,8 +20,10 @@ public class GamePrepareState : IState
         Prepare();
     }
 
-    private async void Prepare() 
+    private async void Prepare()
     {
+        _levelStarter.InitLevel();
+
         _transition.FadeOut(EnterGamePlay);
     }
 

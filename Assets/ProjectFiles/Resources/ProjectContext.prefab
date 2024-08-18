@@ -89,3 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screen: {fileID: 4954634610846829870, guid: de93d0e46c421a94fbcf5eb68d08d384, type: 3}
+  _audioManager: {fileID: 5854156334547898990, guid: 2a06570dd33169341a01f9d18ddcf41b, type: 3}
+  _audioDB: {fileID: 11400000, guid: c1e680e70476fb04392be21e3edbe455, type: 2}

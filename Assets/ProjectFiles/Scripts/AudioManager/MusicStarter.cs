@@ -1,19 +1,17 @@
-using System;
-using UnityEngine;
-using Zenject;
-
-public class MusicStarter : MonoBehaviour
+public class MusicStarter
 {
-    [SerializeField] private string _musicCategoryName;
-    [SerializeField] private bool _loop = true;
     private AudioManager _manager;
     private AudioDB _audioDB;
 
-    [Inject]
-    private void Construct(AudioManager manager, AudioDB audioDB) 
+    private string _musicCategoryName;
+    private bool _loop = true;
+
+    public MusicStarter(AudioManager manager, AudioDB audioDB, string category, bool loop) 
     {
         _manager = manager;
         _audioDB = audioDB;
+        _musicCategoryName = category;
+        _loop = loop;
     }
 
     public void Init()

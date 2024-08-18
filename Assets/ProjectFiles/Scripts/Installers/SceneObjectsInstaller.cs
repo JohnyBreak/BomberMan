@@ -8,7 +8,6 @@ public class SceneObjectsInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<Timer>().FromNew().AsSingle();
         Container.Bind<Portal>().FromInstance(_portal).AsSingle().NonLazy();
         Container.Bind<GameLose>().FromInstance(_lose).AsSingle().NonLazy();
     }

@@ -9,17 +9,28 @@ public class Timer
     private TweenCallback _completeCallback;
     private Tweener _tween;
 
+    private int _from;
+    private int _to;
+
     public Timer()
     {
 
     }
 
-    public void Start(int from, int to, TweenCallback<int> onTick = null, TweenCallback onComplete = null) 
+    public void Init(int from, int to, TweenCallback<int> onTick = null, TweenCallback onComplete = null) 
     {
         _tickCallback = onTick;
         _completeCallback = onComplete;
+        _from = from;
+        _to = to;
+        OnTick(_from);
+    }
 
-        _tween = DOVirtual.Int(from, to, from, OnTick).OnComplete(OnComplete).SetEase(Ease.Linear);
+    public void Start() 
+    {
+        
+
+        _tween = DOVirtual.Int(_from, _to, _from, OnTick).OnComplete(OnComplete).SetEase(Ease.Linear);
     }
 
     public void Stop() 
@@ -61,6 +72,12 @@ public class TimeDuration
 {
     public uint Minutes;
     public uint Seconds;
+
+    public TimeDuration(uint minutes, uint secundes) 
+    {
+        Minutes = minutes;
+        Seconds = secundes;
+    }
 
     public uint GetTotalSeconds() 
     {

@@ -1,55 +1,63 @@
 using GameState;
 using UnityEngine;
-using Zenject;
 
-public class LevelStarter : MonoBehaviour
+public class LevelStarter
 {
-    [SerializeField] private TimerStarter _timerStarter;
-    [SerializeField] private MusicStarter _musicStarter;
-    [SerializeField] private LevelGenerator _levelGenerator;
+    private TimerStarter _timerStarter;
+    private MusicStarter _musicStarter;
+    private LevelGenerator _levelGenerator;
 
-    private IStorageService _service;
+    private IStorageService _storageService;
     private GameStateMachine _machine;
 
-    [Inject]
-    private void Construct(GameStateMachine machine, IStorageService service)
+    public LevelStarter(
+        GameStateMachine machine,
+        IStorageService service,
+        TimerStarter timerStarter,
+        MusicStarter musicStarter,
+        LevelGenerator levelGenerator)
     {
-        _service = service;
+        _storageService = service;
         _machine = machine;
-
+        _timerStarter = timerStarter;
+        _levelGenerator = levelGenerator;
+        _musicStarter = musicStarter;
         _machine.StateChangedEvent += OnStateChanged;
-    }
-
-    private void Awake()
-    {
-        _levelGenerator.Init();
-    }
-
-    private void Start()
-    {
-        _service.Load<int>("LevelNumber", (level) =>
-        {
-            Debug.Log(level);
-        });
     }
 
     private void OnStateChanged(IExitableState state)
     {
-        if (state is GamePlayState) 
+        if (state is GamePrepareState)
+        {
+            InitLevel();
+        }
+
+        if (state is GamePlayState)
         {
             StartLevel();
         }
     }
 
-    private void StartLevel()
+    public void InitLevel()
     {
-        _timerStarter.Init();
+        _storageService.Load<int>("LevelNumber", (level) =>
+        {
+            Debug.Log(level);
+        });
+
+        _levelGenerator.Init(null);
+        _timerStarter.InitTimer(new TimeDuration(03, 00));
+    }
+
+    public void StartLevel()
+    {
+        _timerStarter.StartTimer();
         _musicStarter.Init();
 
         _machine.StateChangedEvent -= OnStateChanged;
     }
 
-    private void OnDestroy()
+    public void Dispose()
     {
         _machine.StateChangedEvent -= OnStateChanged;
     }

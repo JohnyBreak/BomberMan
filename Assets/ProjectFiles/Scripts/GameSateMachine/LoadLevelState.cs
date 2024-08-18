@@ -5,14 +5,13 @@ namespace GameState
 {
     public class LoadLevelState : IPayLoadState<LoadLevelPayLoad>
     {
-        private readonly GameStateMachine m_StateMachine;
         private readonly SceneLoader m_SceneLoader;
         
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        public LoadLevelState(SceneLoader sceneLoader)
         {
-            m_StateMachine = stateMachine;
             m_SceneLoader = sceneLoader;
         }
+
         public void Enter(LoadLevelPayLoad payload)
         {
             m_SceneLoader.Load(payload.SceneName, payload.OnLoadCallback);

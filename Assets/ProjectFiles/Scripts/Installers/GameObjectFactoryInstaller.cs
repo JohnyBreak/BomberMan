@@ -4,6 +4,6 @@ public class GameObjectFactoryInstaller : Installer
 {
     public override void InstallBindings()
     {
-        Container.Bind<GameObjectFactory>().FromNew().AsSingle();
+        //Container.Bind<GameObjectFactory>().FromNew().AsSingle();
     }
 }

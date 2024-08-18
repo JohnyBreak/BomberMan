@@ -16,10 +16,16 @@ public class TimerView : MonoBehaviour
 
     private void OnTick(int value) 
     {
+        SetText(value);
+    }
+
+    public void SetText(int value) 
+    {
         int minutes = value / 60;
         int seconds = value % 60;
         _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 
     private void OnDestroy() 
     {
